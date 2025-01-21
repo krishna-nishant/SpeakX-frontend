@@ -22,7 +22,12 @@ import {
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const SearchWithPagination = () => {
-  const [questions, setQuestions] = useState([]);
+  interface Question {
+    title: string;
+    type: string;
+  }
+  
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -50,7 +55,7 @@ const SearchWithPagination = () => {
     setPage(1);
   };
 
-  const handleLimitChange = (value) => {
+  const handleLimitChange = (value: any) => {
     setLimit(Number(value));
     setPage(1);
   };
