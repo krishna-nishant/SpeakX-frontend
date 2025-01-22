@@ -68,7 +68,7 @@ const SearchWithPagination = () => {
 
     return parts.map((part, index) =>
       part.toLowerCase() === search.toLowerCase() ? (
-        <span key={index} className="bg-blue-200">
+        <span key={index} className="bg-blue-500 text-white px-1 rounded-md">
           {part}
         </span>
       ) : (
@@ -78,63 +78,74 @@ const SearchWithPagination = () => {
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto">
-      <div className="flex items-center gap-4">
-        <Input
-          type="text"
-          placeholder="Search questions..."
-          value={search}
-          onChange={handleSearchChange}
-          className="flex-1"
-        />
+    <div className="min-h-screen bg-gray-900 text-white p-6 flex justify-center items-center">
+      <div className="w-full max-w-4xl bg-gray-800 p-6 rounded-lg shadow-lg">
+        <div className="flex items-center gap-4 mb-6">
+          <Input
+            type="text"
+            placeholder="Search questions..."
+            value={search}
+            onChange={handleSearchChange}
+            className="flex-1 bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+          />
 
-        <Select value={limit.toString()} onValueChange={handleLimitChange}>
-          <SelectTrigger className="w-24">{limit}</SelectTrigger>
-          <SelectContent>
-            <SelectItem value="5">5</SelectItem>
-            <SelectItem value="10">10</SelectItem>
-            <SelectItem value="15">15</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+          <Select value={limit.toString()} onValueChange={handleLimitChange}>
+            <SelectTrigger className="w-24 bg-gray-700 border-gray-600 text-white">
+              {limit}
+            </SelectTrigger>
+            <SelectContent className="bg-gray-800 border-gray-700">
+              <SelectItem value="5">5</SelectItem>
+              <SelectItem value="10">10</SelectItem>
+              <SelectItem value="15">15</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
 
-      <Table className="h-[32rem]">
-        <TableCaption>
-          Showing data from Page {page} out of {Math.ceil(totalPages / limit)}
-        </TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Title</TableHead>
-            <TableHead>Type</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {questions.length > 0 ? (
-            questions.map((q, index) => (
-              <TableRow key={index}>
-                <TableCell>{highlightText(q.title)}</TableCell>
-                <TableCell>{q.type}</TableCell>
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={2}>No questions found.</TableCell>
+        <Table className="w-full border border-gray-700 rounded-lg overflow-hidden">
+          <TableCaption className="text-gray-400 py-2">
+            Showing data from Page {page} out of {Math.ceil(totalPages / limit)}
+          </TableCaption>
+          <TableHeader>
+            <TableRow className="bg-gray-700 text-white">
+              <TableHead className="py-2 px-4">Title</TableHead>
+              <TableHead className="py-2 px-4">Type</TableHead>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {questions.length > 0 ? (
+              questions.map((q, index) => (
+                <TableRow key={index} className="hover:bg-gray-700 transition">
+                  <TableCell className="py-2 px-4">{highlightText(q.title)}</TableCell>
+                  <TableCell className="py-2 px-4">{q.type}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={2} className="text-center py-4 text-gray-400">
+                  No questions found.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
 
-      <div className="flex justify-center mt-4 space-x-2">
-        <Button disabled={page === 1} onClick={() => setPage(page - 1)}>
-          Previous
-        </Button>
-        <span>Page {page}</span>
-        <Button
-          disabled={page === Math.ceil(totalPages / limit)}
-          onClick={() => setPage(page + 1)}
-        >
-          Next
-        </Button>
+        <div className="flex justify-center mt-6 space-x-3">
+          <Button
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg disabled:bg-gray-600"
+          >
+            Previous
+          </Button>
+          <span className="text-gray-300">Page {page}</span>
+          <Button
+            disabled={page === Math.ceil(totalPages / limit)}
+            onClick={() => setPage(page + 1)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg disabled:bg-gray-600"
+          >
+            Next
+          </Button>
+        </div>
       </div>
     </div>
   );
