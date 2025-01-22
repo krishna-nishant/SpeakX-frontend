@@ -3,6 +3,7 @@ import { SearchBar } from "./components/SearchBar";
 import { TypeFilter } from "./components/TypeFilter";
 import { QuestionsTable } from "./components/QuestionsTable";
 import { Pagination } from "./components/Pagination";
+import { FaqSection } from "./components/FaqSection";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -61,15 +62,19 @@ export default function App() {
     const parts = text.split(regex);
     return parts.map((part, index) =>
       part.toLowerCase() === search.toLowerCase() ? (
-        <span key={index} className="bg-blue-500 text-white px-1 rounded-md">{part}</span>
-      ) : part
+        <span key={index} className="bg-blue-500 text-white px-1 rounded-md">
+          {part}
+        </span>
+      ) : (
+        part
+      )
     );
   };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6 flex flex-col gap-6">
       <div className="w-full max-w-4xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
-        <h1 className="text-2xl font-bold mb-4">QuestSearch</h1>
+        <h1 className="text-4xl font-bold mb-4 text-center">QuestSearch</h1>
       </div>
       <div className="w-full max-w-4xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
         <SearchBar
@@ -78,8 +83,15 @@ export default function App() {
           onSearchChange={handleSearchChange}
           onLimitChange={handleLimitChange}
         />
-        <TypeFilter selectedTypes={selectedTypes} onTypeToggle={handleTypeToggle} />
-        <QuestionsTable questions={questions} search={search} highlightText={highlightText} />
+        <TypeFilter
+          selectedTypes={selectedTypes}
+          onTypeToggle={handleTypeToggle}
+        />
+        <QuestionsTable
+          questions={questions}
+          search={search}
+          highlightText={highlightText}
+        />
         <Pagination
           page={page}
           totalPages={totalPages}
@@ -87,6 +99,7 @@ export default function App() {
           onPageChange={setPage}
         />
       </div>
+      <FaqSection />
     </div>
   );
 }
