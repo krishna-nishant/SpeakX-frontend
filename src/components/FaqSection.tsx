@@ -16,7 +16,7 @@ import {
             What technologies are used in this project?
           </AccordionTrigger>
           <AccordionContent className="text-left text-gray-300">
-            I have used React.js, JavaScript, TypeScript, ShadCN UI, Axios, Material-UI (for loading indicators). For backend I have used Express.js (Node.js), gRPC for communication with the database, and MongoDB Atlas as the database.
+            I have used React.js, JavaScript, TypeScript, ShadCN UI, Axios. For backend I have used Express.js (Node.js), gRPC for communication with the database, and MongoDB Atlas as the database.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2" className="border-gray-700">
@@ -32,7 +32,7 @@ import {
             How is data fetched from the backend to the frontend?
           </AccordionTrigger>
           <AccordionContent className="text-left text-gray-300">
-            The React frontend sends an HTTP GET request to the Express server using Axios with query parameters (page, limit, search). Express forwards the request to the gRPC client. The gRPC client communicates with the gRPC server, which queries the MongoDB Atlas database. The MongoDB server responds with the filtered and paginated data. The gRPC server sends the response back to Express. Express sends the processed data back to the frontend. The frontend updates the state and displays the data in a table.
+            The React frontend sends an HTTP GET request to the Express server using Axios with query parameters (page, limit, search, types). Express forwards the request to the gRPC client. The gRPC client communicates with the gRPC server, which queries the MongoDB Atlas database. The MongoDB server responds with the filtered and paginated data. The gRPC server sends the response back to Express. Express sends the processed data back to the frontend. The frontend updates the state and displays the data in a table.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-4" className="border-gray-700">
@@ -56,7 +56,7 @@ import {
             How does the frontend highlight search results?
           </AccordionTrigger>
           <AccordionContent className="text-left text-gray-300">
-            The frontend uses a regex-based function to wrap matched search terms with a span that applies a yellow background.
+            The frontend uses a regex-based function to wrap matched search terms with a span that applies a blue background.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-7" className="border-gray-700">
@@ -64,7 +64,7 @@ import {
             How is API call optimization handled?
           </AccordionTrigger>
           <AccordionContent className="text-left text-gray-300">
-            The useEffect hook is used to trigger data fetching when dependencies (page, search, limit) change, reducing unnecessary API calls.
+            The useEffect hook is used to trigger data fetching when dependencies (page, search, limit, types) change, reducing unnecessary API calls.
           </AccordionContent>
         </AccordionItem>
       </Accordion>
