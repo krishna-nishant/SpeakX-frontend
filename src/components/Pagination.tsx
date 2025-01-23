@@ -5,12 +5,20 @@ interface PaginationProps {
   totalPages: number;
   limit: number;
   onPageChange: (newPage: number) => void;
+  questions: never[];
 }
 
-export const Pagination = ({ page, totalPages, limit, onPageChange }: PaginationProps) => (
+export const Pagination = ({
+  page,
+  totalPages,
+  limit,
+  onPageChange,
+  questions,
+}: PaginationProps) => (
   <>
     <div className="mt-4 text-center text-sm text-gray-400">
-      Showing data from Page {page} out of {Math.ceil(totalPages / limit)}
+      Showing data from Page {questions.length > 0 ? page : 0} out of{" "}
+      {Math.ceil(totalPages / limit)}
     </div>
     <div className="flex justify-center mt-6 space-x-3">
       <Button
@@ -20,7 +28,9 @@ export const Pagination = ({ page, totalPages, limit, onPageChange }: Pagination
       >
         Previous
       </Button>
-      <span className="text-gray-300 mt-1">Page {page}</span>
+      <span className="text-gray-300 mt-1">
+        Page {questions.length > 0 ? page : 0}
+      </span>
       <Button
         disabled={page === Math.ceil(totalPages / limit)}
         onClick={() => onPageChange(page + 1)}

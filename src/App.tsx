@@ -14,6 +14,8 @@ export default function App() {
   const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(5);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     fetchQuestions();
@@ -21,6 +23,7 @@ export default function App() {
 
   const fetchQuestions = async () => {
     try {
+      setLoading(true);
       const queryParams = new URLSearchParams({
         page: page.toString(),
         limit: limit.toString(),
@@ -33,8 +36,10 @@ export default function App() {
       const data = await response.json();
       setQuestions(data.questions || []);
       setTotalPages(data.total);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching questions:", error);
+      setError(error instanceof Error ? "Server Load" : "Server Load");
     }
   };
 
@@ -76,6 +81,7 @@ export default function App() {
       <div className="w-full max-w-4xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
         <h1 className="text-4xl font-bold mb-4 text-center">QuestSearch🔍 </h1>
       </div>
+
       <div className="w-full max-w-4xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
         <SearchBar
           search={search}
@@ -88,15 +94,18 @@ export default function App() {
           onTypeToggle={handleTypeToggle}
         />
         <QuestionsTable
+          loading={loading}
           questions={questions}
           search={search}
           highlightText={highlightText}
+          error={error}
         />
         <Pagination
           page={page}
           totalPages={totalPages}
           limit={limit}
           onPageChange={setPage}
+          questions={questions}
         />
       </div>
       <FaqSection />
