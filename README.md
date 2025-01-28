@@ -1,50 +1,101 @@
-# React + TypeScript + Vite
+# SpeakX Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based frontend application for searching and displaying questions with pagination functionality.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+├── src/
+│   ├── components/
+│   │   └── ui/
+│   │   └── diff components
+│   ├── App.tsx
+│   └── main.tsx
+├── index.html
+└── package.json
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Features
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- Modern React application built with TypeScript
+- Responsive search interface with pagination
+- Real-time search highlighting
+- Customizable items per page
+- Filtering questions by types
+- Loading states and error handling
+- ShadCN UI integration for components
+- Clean and intuitive user interface
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- Modern web browser
+
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/krishna-nishant/Speakx-frontend.git
+
+# Navigate to project directory
+cd Speakx-frontend
+
+# Install dependencies
+npm install
 ```
+
+## Running the Application
+
+```bash
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## Components
+
+**SearchWithPagination**
+- Advanced search functionality
+- Dynamic result highlighting
+- Customizable items per page
+- Pagination controls
+- Loading states
+- Error handling
+
+**Main Features**
+- Table view for search results
+- Real-time search filtering
+- Responsive design
+- Server-side pagination
+- Error state handling
+- Loading indicators
+
+## API Integration
+
+The frontend connects to the backend API at:
+- Base URL: https://speakx-backend-gliq.onrender.com/api
+- Endpoints: 
+  - GET /questions (with pagination and search parameters)
+
+## Technologies Used
+
+- React
+- TypeScript
+- Axios
+- Tailwind CSS
+- Shadcn UI Components
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
